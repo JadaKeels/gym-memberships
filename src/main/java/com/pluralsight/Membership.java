@@ -37,6 +37,15 @@ public abstract class Membership {
         this.baseRate = baseRate;
     }
 
-    // Abstract method implemented by subclasses
     public abstract BigDecimal calculateMonthlyFee();
+
+    public BigDecimal getSignUpFee() {
+        return BigDecimal.ZERO;
+    }
+
+    public BigDecimal getContractTotal() {
+        return calculateMonthlyFee()
+                .multiply(BigDecimal.valueOf(getMonths()))
+                .add(getSignUpFee());
+    }
 }

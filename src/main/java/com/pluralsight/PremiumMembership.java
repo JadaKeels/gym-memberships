@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.math.BigDecimal;
 
 public class PremiumMembership extends Membership {
+
     private int guestPasses;
 
     public PremiumMembership(String memberName,
@@ -26,6 +27,7 @@ public class PremiumMembership extends Membership {
         return getBaseRate().add(new BigDecimal("18.50"));
     }
 
+    @Override
     public BigDecimal getSignUpFee() {
         if (getMonths() >= 12) {
             return BigDecimal.ZERO;
@@ -36,6 +38,7 @@ public class PremiumMembership extends Membership {
     public void useGuestPass() {
         if (guestPasses > 0) {
             guestPasses--;
+
             System.out.println(
                     getMemberName()
                             + " used a guest pass. Remaining passes: "
