@@ -15,20 +15,22 @@ public class FamilyMembership extends Membership {
     public int getExtraMembers() {
         return extraMembers;
     }
-
     public void setExtraMembers(int extraMembers) {
         this.extraMembers = extraMembers;
     }
 
     @Override
     public BigDecimal getMonthlyPrice() {
-        BigDecimal price = getBaseRate().add(
+        BigDecimal monthlyPrice = getBaseRate().add(
                 BigDecimal.valueOf(extraMembers)
-                        .multiply(new BigDecimal("12.50")));
+                        .multiply(new BigDecimal("12.50"))
+        );
         if (extraMembers >= 3) {
-            price = price.multiply(new BigDecimal("0.90"));
+            monthlyPrice = monthlyPrice.multiply(
+                    new BigDecimal("0.90"));
         }
-        return price;
+
+        return monthlyPrice;
     }
 
     @Override

@@ -31,9 +31,14 @@ public class PremiumMembership extends Membership {
         }
         return new BigDecimal("49.00");
     }
+
     public void useGuestPass() {
         if (guestPasses > 0) {
             guestPasses--;
+            System.out.println(
+                    getMemberName()
+                            + " used a guest pass. Remaining passes: "
+                            + guestPasses);
         }
     }
 
