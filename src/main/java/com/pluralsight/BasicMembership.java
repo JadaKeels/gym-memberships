@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class BasicMembership extends Membership {
     private boolean offPeakOnly;
+
     public BasicMembership(String memberName,
                            int months,
                            BigDecimal baseRate,
@@ -21,7 +22,7 @@ public class BasicMembership extends Membership {
     }
 
     @Override
-    public BigDecimal getMonthlyPrice() {
+    public BigDecimal calculateMonthlyFee() {
         if (offPeakOnly) {
             return getBaseRate().subtract(new BigDecimal("5.00"));
         }
