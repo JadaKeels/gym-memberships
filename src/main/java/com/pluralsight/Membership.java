@@ -6,6 +6,7 @@ public abstract class Membership {
     private String memberName;
     private int months;
     private BigDecimal baseRate;
+
     public Membership(String memberName, int months, BigDecimal baseRate) {
         this.memberName = memberName;
         this.months = months;
@@ -36,4 +37,6 @@ public abstract class Membership {
         this.baseRate = baseRate;
     }
 
-// Abstract method implemented by subclasses
+    // Abstract method implemented by subclasses
+    public abstract BigDecimal calculateMonthlyFee();
+}
