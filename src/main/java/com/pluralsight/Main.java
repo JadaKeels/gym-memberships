@@ -8,69 +8,82 @@ public class Main {
 
         ArrayList<Membership> memberships = new ArrayList<>();
 
-        BasicMembership alice = new BasicMembership(
+        memberships.add(new BasicMembership(
                 "Alice Johnson",
                 6,
                 new BigDecimal("30.00"),
-                true);
+                true));
 
-        BasicMembership bob = new BasicMembership(
+        memberships.add(new BasicMembership(
                 "Bob Smith",
                 12,
                 new BigDecimal("30.00"),
-                false);
+                false));
 
-        PremiumMembership carol = new PremiumMembership(
+        memberships.add(new PremiumMembership(
                 "Carol White",
                 12,
                 new BigDecimal("30.00"),
-                3);
+                3));
 
-        PremiumMembership frank = new PremiumMembership(
+        memberships.add(new PremiumMembership(
                 "Frank Miller",
                 6,
                 new BigDecimal("30.00"),
-                1);
+                1));
 
-        FamilyMembership grace = new FamilyMembership(
+        memberships.add(new FamilyMembership(
                 "Grace Lee",
                 12,
                 new BigDecimal("30.00"),
-                3);
+                3));
 
-        FamilyMembership emma = new FamilyMembership(
+        memberships.add(new FamilyMembership(
                 "Emma Wilson",
                 6,
                 new BigDecimal("30.00"),
-                2);
+                2));
 
-        memberships.add(alice);
-        memberships.add(bob);
-        memberships.add(carol);
-        memberships.add(frank);
-        memberships.add(grace);
-        memberships.add(emma);
-
+// First loop
         for (Membership membership : memberships) {
             System.out.println(membership);
             printCosts(membership);
             System.out.println();
         }
 
-        // Second loop using instanceof
-        System.out.println("Premium Members Guest Pass Demo:");
+// Second loop (Step 9)
+        System.out.println("\n=== Front Desk Processing ===");
+
         for (Membership membership : memberships) {
-            if (membership instanceof PremiumMembership) {
+
+            if (membership instanceof BasicMembership) {
+
+                BasicMembership basic =
+                        (BasicMembership) membership;
+
+                if (basic.isOffPeakOnly()) {
+                    System.out.println(
+                            basic.getMemberName()
+                                    + ": entry between 10:00 and 16:00 only");
+                }
+
+            } else if (membership instanceof PremiumMembership) {
+
                 PremiumMembership premium =
                         (PremiumMembership) membership;
 
-                System.out.println(
-                        premium.getMemberName()
-                                + " has "
-                                + premium.getGuestPasses()
-                                + " guest passes.");
-
                 premium.useGuestPass();
+
+            } else if (membership instanceof FamilyMembership) {
+
+                FamilyMembership family =
+                        (FamilyMembership) membership;
+
+                System.out.println(
+                        family.getMemberName()
+                                + ": print "
+                                + (family.getExtraMembers() + 1)
+                                + " key cards");
             }
         }
     }

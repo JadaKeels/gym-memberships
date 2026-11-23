@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.math.BigDecimal;
 
 public class BasicMembership extends Membership {
+
     private boolean offPeakOnly;
 
     public BasicMembership(String memberName,
@@ -26,7 +27,6 @@ public class BasicMembership extends Membership {
         if (offPeakOnly) {
             return getBaseRate().subtract(new BigDecimal("5.00"));
         }
-
         return getBaseRate();
     }
 
