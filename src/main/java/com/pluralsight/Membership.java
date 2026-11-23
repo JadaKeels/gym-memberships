@@ -6,7 +6,6 @@ public abstract class Membership {
     private String memberName;
     private int months;
     private BigDecimal baseRate;
-
     public Membership(String memberName, int months, BigDecimal baseRate) {
         this.memberName = memberName;
         this.months = months;
@@ -16,36 +15,40 @@ public abstract class Membership {
     public String getMemberName() {
         return memberName;
     }
-
     public void setMemberName(String memberName) {
         this.memberName = memberName;
     }
-
     public int getMonths() {
         return months;
     }
-
     public void setMonths(int months) {
         this.months = months;
     }
-
     public BigDecimal getBaseRate() {
         return baseRate;
     }
-
     public void setBaseRate(BigDecimal baseRate) {
         this.baseRate = baseRate;
     }
-
-    public abstract BigDecimal calculateMonthlyFee();
-
+    public BigDecimal getMonthlyPrice() {
+        return baseRate;
+    }
     public BigDecimal getSignUpFee() {
-        return BigDecimal.ZERO;
+        return new BigDecimal("49.00");
     }
 
     public BigDecimal getContractTotal() {
-        return calculateMonthlyFee()
-                .multiply(BigDecimal.valueOf(getMonths()))
+        return getMonthlyPrice()
+                .multiply(BigDecimal.valueOf(months))
                 .add(getSignUpFee());
+    }
+
+    @Override
+    public String toString() {
+        return "Membership | "
+                + memberName
+                + " | "
+                + months
+                + " months";
     }
 }

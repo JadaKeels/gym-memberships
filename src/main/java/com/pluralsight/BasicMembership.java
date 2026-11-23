@@ -3,9 +3,7 @@ package com.pluralsight;
 import java.math.BigDecimal;
 
 public class BasicMembership extends Membership {
-
     private boolean offPeakOnly;
-
     public BasicMembership(String memberName,
                            int months,
                            BigDecimal baseRate,
@@ -17,13 +15,12 @@ public class BasicMembership extends Membership {
     public boolean isOffPeakOnly() {
         return offPeakOnly;
     }
-
     public void setOffPeakOnly(boolean offPeakOnly) {
         this.offPeakOnly = offPeakOnly;
     }
 
     @Override
-    public BigDecimal calculateMonthlyFee() {
+    public BigDecimal getMonthlyPrice() {
         if (offPeakOnly) {
             return getBaseRate().subtract(new BigDecimal("5.00"));
         }
