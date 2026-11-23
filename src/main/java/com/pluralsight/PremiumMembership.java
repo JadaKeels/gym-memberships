@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.math.BigDecimal;
+
 public class PremiumMembership extends Membership {
     private int guestPasses;
     public PremiumMembership(String memberName,
