@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class FamilyMembership extends Membership {
     private int extraMembers;
+
     public FamilyMembership(String memberName,
                             int months,
                             BigDecimal baseRate,
@@ -21,11 +22,12 @@ public class FamilyMembership extends Membership {
     }
 
     @Override
-    public BigDecimal getMonthlyPrice() {
+    public BigDecimal calculateMonthlyFee() {
         BigDecimal monthlyPrice = getBaseRate().add(
                 BigDecimal.valueOf(extraMembers)
                         .multiply(new BigDecimal("12.50"))
         );
+
         // 10% discount for families with 3 or more extra members
         if (extraMembers >= 3) {
             monthlyPrice = monthlyPrice.multiply(new BigDecimal("0.90"));
