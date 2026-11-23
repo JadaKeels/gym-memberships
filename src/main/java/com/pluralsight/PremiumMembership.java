@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class PremiumMembership extends Membership {
     private int guestPasses;
+
     public PremiumMembership(String memberName,
                              int months,
                              BigDecimal baseRate,
@@ -21,11 +22,10 @@ public class PremiumMembership extends Membership {
     }
 
     @Override
-    public BigDecimal getMonthlyPrice() {
+    public BigDecimal calculateMonthlyFee() {
         return getBaseRate().add(new BigDecimal("18.50"));
     }
 
-    @Override
     public BigDecimal getSignUpFee() {
         if (getMonths() >= 12) {
             return BigDecimal.ZERO;
