@@ -4,54 +4,83 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Main {
+
     public static void main(String[] args) {
 
         ArrayList<Membership> memberships = new ArrayList<>();
 
-        memberships.add(new BasicMembership(
+        BasicMembership alice = new BasicMembership(
                 "Alice Johnson",
                 6,
                 new BigDecimal("30.00"),
-                true));
+                true);
 
-        memberships.add(new BasicMembership(
+        BasicMembership bob = new BasicMembership(
                 "Bob Smith",
                 12,
                 new BigDecimal("30.00"),
-                false));
+                false);
 
-        memberships.add(new PremiumMembership(
+        PremiumMembership carol = new PremiumMembership(
                 "Carol White",
                 12,
                 new BigDecimal("30.00"),
-                3));
+                3);
 
-        memberships.add(new PremiumMembership(
+        PremiumMembership frank = new PremiumMembership(
                 "Frank Miller",
                 6,
                 new BigDecimal("30.00"),
-                1));
+                1);
 
-        memberships.add(new FamilyMembership(
+        FamilyMembership grace = new FamilyMembership(
                 "Grace Lee",
                 12,
                 new BigDecimal("30.00"),
-                3));
+                3);
 
-        memberships.add(new FamilyMembership(
+        FamilyMembership emma = new FamilyMembership(
                 "Emma Wilson",
                 6,
                 new BigDecimal("30.00"),
-                2));
+                2);
 
-// First loop
+        memberships.add(alice);
+        memberships.add(bob);
+        memberships.add(carol);
+        memberships.add(frank);
+        memberships.add(grace);
+        memberships.add(emma);
+
+        System.out.println("=== Membership Information ===\n");
+
         for (Membership membership : memberships) {
             System.out.println(membership);
             printCosts(membership);
             System.out.println();
         }
 
-// Second loop (Step 9)
+        BigDecimal monthlyIncome = BigDecimal.ZERO;
+        BigDecimal allContracts = BigDecimal.ZERO;
+
+        for (Membership membership : memberships) {
+            monthlyIncome = monthlyIncome.add(
+                    membership.calculateMonthlyFee());
+
+            allContracts = allContracts.add(
+                    membership.getContractTotal());
+        }
+
+        System.out.println("=== Totals ===");
+        System.out.println("Memberships: "
+                + memberships.size());
+
+        System.out.println("Monthly Income: $"
+                + monthlyIncome);
+
+        System.out.println("All Contracts: $"
+                + allContracts);
+
         System.out.println("\n=== Front Desk Processing ===");
 
         for (Membership membership : memberships) {
@@ -85,6 +114,15 @@ public class Main {
                                 + (family.getExtraMembers() + 1)
                                 + " key cards");
             }
+        }
+
+        System.out.println("\n=== Membership Types ===");
+
+        for (Membership membership : memberships) {
+            System.out.println(
+                    membership.getMemberName()
+                            + ": "
+                            + membership.getClass().getSimpleName());
         }
     }
 
